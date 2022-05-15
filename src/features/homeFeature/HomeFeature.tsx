@@ -82,7 +82,14 @@ export function HomeFeature() {
   const GetCategories = () => {
     return axios
       .get(
-        "https://zlp3kyabh2.execute-api.us-east-1.amazonaws.com/Prod/categories"
+        "https://zlp3kyabh2.execute-api.us-east-1.amazonaws.com/Prod/categories",
+        {
+          headers: {
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS, GET, POST",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
       )
       .then((res) => {
         console.log("res exito", res);
