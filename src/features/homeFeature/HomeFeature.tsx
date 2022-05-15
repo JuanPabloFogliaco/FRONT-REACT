@@ -85,9 +85,8 @@ export function HomeFeature() {
         "https://zlp3kyabh2.execute-api.us-east-1.amazonaws.com/Prod/categories",
         {
           headers: {
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Methods": "OPTIONS, GET, POST",
             "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
           },
         }
       )
