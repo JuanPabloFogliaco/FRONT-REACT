@@ -85,8 +85,7 @@ export function HomeFeature() {
         "https://zlp3kyabh2.execute-api.us-east-1.amazonaws.com/Prod/categories",
         {
           headers: {
-            "Access-Control-Allow-Origin": "*",
-            Acept: "application/json",
+            "Access-Control-Allow-Origin": "*"
           },
         }
       )
