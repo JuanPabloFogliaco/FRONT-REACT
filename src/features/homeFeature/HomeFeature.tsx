@@ -82,7 +82,7 @@ export function HomeFeature() {
   const GetCategories = () => {
     return axios
       .get(
-        "https://zlp3kyabh2.execute-api.us-east-1.amazonaws.com/Prod/categories"
+        "https://bx7pv0xv1l.execute-api.us-east-1.amazonaws.com/Prod/api/categories"
       )
       .then((res) => {
         console.log("res exito", res);
