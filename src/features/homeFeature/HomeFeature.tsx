@@ -82,14 +82,7 @@ export function HomeFeature() {
   const GetCategories = () => {
     return axios
       .get(
-        "https://zlp3kyabh2.execute-api.us-east-1.amazonaws.com/Prod/categories",
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers":
-              "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
-          },
-        }
+        "https://zlp3kyabh2.execute-api.us-east-1.amazonaws.com/Prod/categories"
       )
       .then((res) => {
         console.log("res exito", res);
