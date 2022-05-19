@@ -69,7 +69,7 @@ export function HomeFeature() {
 
   const GetProducts = (categorieId: number) => {
     return axios
-      .post("http://localhost:8080/api/v1/products", { categorieId })
+      .post("https://bx7pv0xv1l.execute-api.us-east-1.amazonaws.com/Prod/api/products", { categorieId })
       .then((res) => {
         console.log("res exito", res);
         setProducts(res.data);
