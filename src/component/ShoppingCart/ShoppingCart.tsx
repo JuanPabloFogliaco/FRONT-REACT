@@ -7,6 +7,8 @@ import { useState } from "react";
 import { TitleDestacadoC } from "../TitleDestacado/TitleDestacado";
 import { Separator } from "../Separator/Separator";
 import ReactLoading from "react-loading";
+import { SideBarMobile } from "./SideBar/SideBarMobile";
+import { ButtonOpenSideBarMobile } from "./SideBar/ButtonOpenSideBarMobile";
 interface Props {
   categories?: Array<any>;
   products?: Array<any>;
@@ -26,6 +28,7 @@ export const ShoppingCart = (props: Props) => {
     totalPay: 0,
     products: [],
   });
+  const [openSideBarMobile, setOpenSideBarMobile] = useState(false);
 
   const clickButton = (categorie: any) => {
     setActive(categorie.id);
@@ -80,6 +83,11 @@ export const ShoppingCart = (props: Props) => {
         aligItem="center"
       >
         <TitleDestacadoC />
+        <ButtonOpenSideBarMobile
+          onClick={() => setOpenSideBarMobile(!openSideBarMobile)}
+        >
+         open filtro/menu
+        </ButtonOpenSideBarMobile>
       </Wraper>
 
       <Wraper
@@ -93,6 +101,7 @@ export const ShoppingCart = (props: Props) => {
         <SideBar alignItems="left" justifyContent="flex-start">
           {renderButtons()}
         </SideBar>
+        {openSideBarMobile && <SideBarMobile>{renderButtons()}</SideBarMobile>}
         {props.loading ? (
           <Wraper
             width="100%"
