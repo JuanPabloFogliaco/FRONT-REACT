@@ -9,8 +9,16 @@ export const Product = styled.div`
   box-shadow: black 0px 0px 11px;
   border-radius: 12px;
   margin: 5px;
-  @media only screen and (max-width: 565px) {
+  @media only screen and (max-width: 647px) {
+    width: 45%;
+  }
+  @media only screen and (max-width: 519px) {
     width: 100%;
+  }
+  @media only screen and (max-width: 519px) {
+    width: 80%;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -62,7 +70,7 @@ export const WrapperButtonPay = styled.div`
 
 export const ButtonPay = styled.button`
   border-radius: 5px;
-  width: 50%;
+  width: 120px;
   height: 25px;
   background: #ad3245;
   color: "#e6bfc5";
@@ -72,3 +80,48 @@ export const ButtonPay = styled.button`
     background-color: #d12f2a;
   }
 `;
+
+export const WraperPoducts = styled.div`
+  background: ${(props: Props) =>
+    props.background ? props.background : "#0f0f0f"};
+  width: ${(props: Props) => (props.width ? props.width : "100%")};
+  height: ${(props: Props) => (props.height ? props.height : "100vh")};
+  display: flex;
+  flex-direction: ${(props: Props) =>
+    props.flexDirection ? props.flexDirection : "column"};
+  justify-content: ${(props: Props) =>
+    props.justifyContent ? props.justifyContent : "flex-start"};
+  align-items: ${(props: Props) =>
+    props.aligItem ? props.aligItem : "center"};
+  padding: ${(props: Props) => (props.padding ? props.padding : "0px")};
+  top: ${(props: Props) => (props.top ? props.top : "center")};
+  padding-left: ${(props: Props) =>
+    props.paddingLeft ? props.paddingLeft : "0px"};
+  flex-wrap: ${(props: Props) => (props.wrap ? props.wrap : "")};
+  padding-right: ${(props: Props) =>
+    props.paddingRight ? props.paddingRight : "0px"};
+  position: ${(props: Props) => (props.position ? props.position : "0px")};
+  padding-top: ${(props: Props) =>
+    props.paddingTop ? props.paddingTop : "0px"};
+     @media only screen and (max-width: 519px) {
+    width:100%;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+interface Props {
+  justifyContent?: string;
+  aligItem?: string;
+  flexDirection?: string;
+  padding?: string;
+  top?: string;
+  background?: string;
+  height?: string;
+  paddingLeft?: string;
+  width?: string;
+  wrap?: string;
+  paddingRight?: string;
+  position?: string;
+  paddingTop?: string;
+}

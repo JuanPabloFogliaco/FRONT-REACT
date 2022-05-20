@@ -1,15 +1,17 @@
 import { ImagenComponent } from "../ImageComponent/Image";
+import { Separator } from "../Separator/Separator";
 import { Title } from "../Title/Title";
 import { Wraper } from "../Wrapper/Wrapper";
 
 const imag1 = require("../../styleSheets/images/shopping-cart.png");
-
+const accountUser = require("../../styleSheets/images/usuario.png");
 interface Props {
   background: string;
   height: string;
   logout: any;
   title: string;
   color?: string;
+  countProductsInShoppingCart: number;
 }
 
 export const Header = (props: Props) => {
@@ -27,7 +29,7 @@ export const Header = (props: Props) => {
       <Wraper
         flexDirection="row"
         width="200px"
-        justifyContent="space-around"
+        justifyContent="flex-end"
         aligItem="center"
         background="white"
       >
@@ -38,18 +40,15 @@ export const Header = (props: Props) => {
           aligItem="center"
           background="white"
         >
-          1
+          <Title size={16} paddingLeft={"0px"} color={props.color}>
+            {props.countProductsInShoppingCart}
+          </Title>
+          <Separator width={"5"} />
           <ImagenComponent src={imag1} />
+          <Separator width={"15"} />
         </Wraper>
-
-        <Title
-          color={props.color}
-          cursor="pointer"
-          onClick={() => props.logout()}
-          padding={"20px"}
-        >
-          Cerrar sesion
-        </Title>
+        <ImagenComponent onClick={() => props.logout()} src={accountUser} />
+        <Separator width={"15"} />
       </Wraper>
     </Wraper>
   );

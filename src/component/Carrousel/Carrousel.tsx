@@ -1,8 +1,8 @@
 import { Wraper } from "../Wrapper/Wrapper";
 
 export const Carrousel = () => {
-  return <Wraper background="red" height="350px">
-
+  return <Wraper position="relative" flexDirection="column" justifyContent="center" aligItem="center" background="whitesmoke" height="350px" width="100%">
+   
   </Wraper>;
 };
 

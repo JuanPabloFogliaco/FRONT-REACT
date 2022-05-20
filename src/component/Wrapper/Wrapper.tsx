@@ -14,6 +14,8 @@ interface Props {
   width?: string;
   wrap?: string;
   paddingRight?: string;
+  position?: string;
+  paddingTop?: string;
 }
 
 // Create a <Title> react component that renders an <h1> which is
@@ -37,4 +39,7 @@ export const Wraper = styled.div`
   flex-wrap: ${(props: Props) => (props.wrap ? props.wrap : "")};
   padding-right: ${(props: Props) =>
     props.paddingRight ? props.paddingRight : "0px"};
+  position: ${(props: Props) => (props.position ? props.position : "0px")};
+  padding-top: ${(props: Props) =>
+    props.paddingTop ? props.paddingTop : "0px"};
 `;

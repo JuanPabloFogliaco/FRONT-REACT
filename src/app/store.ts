@@ -1,10 +1,11 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import loginReducer from '../features/loginFeature/LoginSlice';
-
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import HomeReducer from "../features/homeFeature/HomeSlice";
+import loginReducer from "../features/loginFeature/LoginSlice";
 
 export const store = configureStore({
   reducer: {
     login: loginReducer,
+    home: HomeReducer,
   },
 });
 

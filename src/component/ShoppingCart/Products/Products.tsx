@@ -9,6 +9,7 @@ import {
   TitleProduct,
   WrapperButtonPay,
   WrapperInfoProduct,
+  WraperPoducts
 } from "../Product/Product";
 
 interface Props {
@@ -18,14 +19,15 @@ interface Props {
 
 export const Products = (props: Props) => {
   return (
-    <Wraper
+    <WraperPoducts
       background="#0f0f0f"
       flexDirection="row"
-      justifyContent="space-around"
+      justifyContent="flex-start"
       width="100%"
-      height="100vh"
+      height="auto"
       wrap="wrap"
-      paddingRight="32px"
+      top={"100"}
+      aligItem="flex-start"
     >
       {props.products?.map((product: any) => {
         return (
@@ -36,7 +38,7 @@ export const Products = (props: Props) => {
               <Separator height="3" />
               <SubTitleProduct>{"STOCK"}</SubTitleProduct>
               <Separator height="3" />
-              <PriceProduct>{product.price}</PriceProduct>
+              <PriceProduct>$ {product.price}</PriceProduct>
               <Separator height="32" />
               <WrapperButtonPay>
                 <ButtonPay onClick={() => props.buy(product)}>
@@ -47,7 +49,7 @@ export const Products = (props: Props) => {
           </Product>
         );
       })}
-    </Wraper>
+    </WraperPoducts>
   );
 };
 

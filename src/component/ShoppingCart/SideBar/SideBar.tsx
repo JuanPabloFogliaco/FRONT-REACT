@@ -17,5 +17,8 @@ export const SideBar = styled.div`
   align-items: ${(props: Props) =>
     props.alignItems ? props.alignItems : "center"};
   padding-left: 32px;
-  padding-right:32px;
+  padding-right: 32px;
+  @media (max-width: 400px) {
+    display: none;
+  }
 `;

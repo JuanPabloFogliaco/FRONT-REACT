@@ -1,25 +1,25 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchCount } from './HomeAPI';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 
 export interface ShoppingCartI {
-  totalPay: number,
-  products: Array<Product>,
+  totalPay: number;
+  products: Array<Product>;
 }
 
 export interface Product {
-  title: string,
-  stock: string,
-  price: string,
+  title: string;
+  stock: string;
+  price: string;
 }
 
-export interface RegisterState {
-  shoppingCart: ShoppingCartI
-  status: 'idle' | 'loading' | 'failed';
+export interface HomeState {
+  shoppingCart: ShoppingCartI;
+  status: "idle" | "loading" | "failed";
 }
 
-const initialState: RegisterState = {
+const initialState: HomeState = {
   shoppingCart: { totalPay: 0, products: [] },
-  status: 'idle',
+  status: "idle",
 };
 
 /* export const incrementAsync = createAsyncThunk(
@@ -31,25 +31,23 @@ const initialState: RegisterState = {
 ); */
 
 export const registerSlice = createSlice({
-  name: 'home',
+  name: "home",
   initialState,
 
   reducers: {
     updateShoppingCart: (state, { payload }) => {
-      console.log("REDUCER",payload.action)
+      console.log("REDUCER", payload.action);
       state.shoppingCart.totalPay += payload.price;
-      state.shoppingCart.products = [...state.shoppingCart.products, payload]
-    }
+      state.shoppingCart.products = [...state.shoppingCart.products, payload];
+    },
   },
 
-  extraReducers: (builder) => {
-  },
+  extraReducers: (builder) => {},
 });
 
-export const {updateShoppingCart } = registerSlice.actions;
+export const productsInShoppingCart = (state: RootState) =>
+  state.home.shoppingCart.products;
 
-
-
-
+export const { updateShoppingCart } = registerSlice.actions;
 
 export default registerSlice.reducer;
