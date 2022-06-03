@@ -23,7 +23,9 @@ export const Card = styled.div`
   width: ${(props: Props) => (props.width ? props.width : "auto")};
   height: ${(props: Props) => (props.height ? props.height : "auto")};
   padding: ${(props: Props) => (props.padding ? props.padding : "0px")}; 
-  
+  box-shadow: 0px 0px 32px -10px rgba(0,0,0,0.48);
+-webkit-box-shadow: 0px 0px 32px -10px rgba(0,0,0,0.48);
+-moz-box-shadow: 0px 0px 32px -10px rgba(0,0,0,0.48);
 `;
 
 export const CardFooter = styled.div`

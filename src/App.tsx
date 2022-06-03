@@ -4,7 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import { HomeFeature } from "./features/homeFeature/HomeFeature";
 import { LoginFeature } from "./features/loginFeature/LoginFeature";
 import { RegisterFeature } from "./features/registerFeature/RegisterFeature";
+import { DetailShoppingCart } from "./features/detailShoppingCartFeature/DetailShoppingCartFeature";
 import "./styles/App.css";
+import Loading from "./component/Loading/Loading";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -78,13 +80,14 @@ function App() {
   }, [token]);
 
   return loading ? (
-    <h1>LOADING</h1>
+    <Loading />
   ) : (
     <div className="App">
       <Routes>
         <Route path="/" element={<HomeFeature />} />
         <Route path="/register" element={<RegisterFeature />} />
         <Route path="/login" element={<LoginFeature />} />
+        <Route path="/shopping-cart" element={<DetailShoppingCart />} />
       </Routes>
     </div>
   );

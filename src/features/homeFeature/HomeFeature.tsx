@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Carrousel from "../../component/Carrousel/Carrousel";
 import Header from "../../component/Header/Header";
-import ShoppingCart from "../../component/ShoppingCart/ShoppingCart";
-import { Wraper } from "../../component/Wrapper/Wrapper";
-import { getToken } from "../utils";
+import ShoppingCart from "./shoppingCartFeature/ShoppingCartFeature";
+import Filter from "../../component/SubHeader/Filter/Filter";
+import SubHeader from "../../component/SubHeader/SubHeader";
 import { productsInShoppingCart, updateShoppingCart } from "./HomeSlice";
+import { WrapperHome } from "./HomeStyle";
+import { GetCategoriesAPI, GetProductsAPI } from "./HomeAPI";
 
 interface ResponseLogin {
   data: any;
@@ -15,31 +17,28 @@ interface ResponseLogin {
   message: string;
 }
 
-interface Categorie {
-  id: number;
-  name: string;
-}
-
 export function HomeFeature() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const productsCount = useAppSelector(productsInShoppingCart);
-  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [openFilter, setOpenFilter] = useState(false);
   const [response, setResponse] = useState<ResponseLogin>({
     code: 0,
     data: null,
     message: "",
   });
-  const [loading, setLoading] = useState(false);
-
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     /*  if (getToken() === null) navigate("/login"); */
     /*  const email = localStorage.getItem("email");
     GetUser(email != null ? email : ""); */
-    GetCategories();
-    GetProducts(1);
+    Promise.all([GetCategories(), GetProducts(1)]).then((values) => {
+      console.log(values);
+    });
   }, []);
 
   const GetUser = (email: string) => {
@@ -71,23 +70,17 @@ export function HomeFeature() {
   const GetProducts = async (categorieId: number) => {
     setLoading(true);
     setProducts([]);
-    const responseGetProducts = await axios.post(
-      "https://bx7pv0xv1l.execute-api.us-east-1.amazonaws.com/Prod/api/products",
-      { categorieId: categorieId }
-    );
+    const responseGetProducts = await GetProductsAPI(categorieId);
     if (!responseGetProducts) return;
-    setProducts(responseGetProducts.data);
+    setProducts(responseGetProducts);
     setLoading(false);
   };
 
   const GetCategories = async () => {
     setLoading(true);
-    const responseGetCategories = await axios.post(
-      "https://bx7pv0xv1l.execute-api.us-east-1.amazonaws.com/Prod/api/categories",
-      {}
-    );
+    const responseGetCategories = await GetCategoriesAPI();
     if (!responseGetCategories) return;
-    setCategories(responseGetCategories.data);
+    setCategories(responseGetCategories);
     setLoading(false);
   };
 
@@ -95,49 +88,39 @@ export function HomeFeature() {
     localStorage.clear();
   };
 
-  const clickButton = (categorieId: number) => {
-    console.log("categorieId", categorieId);
-    GetProducts(categorieId);
+  const clickButton = async (categorieId: number) => {
+    await GetProducts(categorieId);
   };
 
   const Buy = (product: any) => {
-    console.log("product", product);
     dispatch(updateShoppingCart(product));
   };
 
   return (
-    <Wraper
-      width="100%"
-      background="white"
-      height="auto"
-      flexDirection="column"
-    >
+    <WrapperHome>
       <Header
-        color="black"
-        background="#fff"
-        height="80px"
+        navigate={() => navigate("/shopping-cart")}
         title={"ShoppingCart"}
         logout={() => Logout()}
         countProductsInShoppingCart={productsCount.length}
       />
-      <Wraper
-        width="100%"
-        background="white"
-        height="auto"
-        justifyContent="center"
-        flexDirection="column"
-        aligItem="center"
-      >
-        <Carrousel />
 
-        <ShoppingCart
-          clickButton={(callb: any) => clickButton(callb)}
-          categories={categories}
-          products={products}
-          buy={(product: any) => Buy(product)}
-          loading={loading}
-        />
-      </Wraper>
-    </Wraper>
+      <SubHeader
+        openFilter={openFilter}
+        setOpenFilter={(value: boolean) => setOpenFilter(value)}
+        placeholder="Buscar categorias, productos y màs..."
+      />
+
+      {openFilter ? <Filter /> : <Carrousel />}
+
+      <ShoppingCart
+        titleDestacado="Productos"
+        clickButton={(callb: any) => clickButton(callb)}
+        categories={categories}
+        products={products}
+        buy={(product: any) => Buy(product)}
+        loading={loading}
+      />
+    </WrapperHome>
   );
 }

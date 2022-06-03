@@ -7,8 +7,11 @@ export interface ShoppingCartI {
 }
 
 export interface Product {
-  title: string;
-  stock: string;
+  id: number;
+  active: boolean;
+  categorieId: number;
+  description: string;
+  name: string;
   price: string;
 }
 
@@ -47,6 +50,8 @@ export const registerSlice = createSlice({
 
 export const productsInShoppingCart = (state: RootState) =>
   state.home.shoppingCart.products;
+
+export const dataInShoppingCart = (state: RootState) => state.home.shoppingCart;
 
 export const { updateShoppingCart } = registerSlice.actions;
 

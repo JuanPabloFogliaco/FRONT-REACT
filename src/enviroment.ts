@@ -1,0 +1,1 @@
+export const URL_BASE = 'https://bx7pv0xv1l.execute-api.us-east-1.amazonaws.com/Prod/api'
