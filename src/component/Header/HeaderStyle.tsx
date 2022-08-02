@@ -4,15 +4,15 @@ import styled from "styled-components";
 
 export const WrapperHeader = styled.div`
   display: flex;
-  width: "100%";
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background: #fff;
-  height: "60px";
+  height: 60px;
   color: black;
-  box-shadow: "1px 5px 15px -3px rgba(0, 0, 0, 0.32)";
-  padding-right: 20px ;
+  box-shadow: 1px 5px 15px -3px rgba(0, 0, 0, 0.32);
+
 `;
 
 export const TitleHeader = styled.div`
@@ -30,7 +30,7 @@ export const KeyPadsHeader = styled.div`
   display: flex;
   flex-direction: row;
   width: 100px;
-  height: 100%;
+  height: auto;
   justify-content: flex-end;
   align-items: center;
   background: white;
@@ -40,12 +40,12 @@ export const KeyPadsHeader = styled.div`
 export const CountShoppingCart = styled.div`
   display: flex;
   flex-direction: row;
-  height: 100%;
+  height: auto;
   justify-content: center;
   align-items: center;
   background: white;
   cursor: pointer;
-  padding: 10px ;
+  padding-right: 10px;
 `;
 
 export const TitleCountShoppingCart = styled.div`

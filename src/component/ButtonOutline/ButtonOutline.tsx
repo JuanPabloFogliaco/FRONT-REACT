@@ -2,12 +2,11 @@ import React from "react";
 
 import styled from "styled-components";
 
-export const ButtonOutline = styled.button`
+export const ButtonOutline = styled.div`
   width: 130px;
   height: 40px;
-  background: #ffffff;
-  border: 1;
-  border-color: #3baa34;
+  background: #3c84ad;
+  color: white;
   border-radius: 32px;
   cursor: pointer;
   display: flex;

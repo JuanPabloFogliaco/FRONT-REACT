@@ -3,19 +3,21 @@ import React from "react";
 import styled from "styled-components";
 
 export const WrapperShoppingCart = styled.div`
+  display: flex;
   width: 100%;
-  height: auto;
+  height: 100%;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  position: relative;
 `;
 
 export const WrapperTitleOutstanding = styled.div`
-  height: 100%;
+  width: 100%;
+  height: auto;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background-color: #f5f5f5;
 `;
 
 export const ContentTitleOutstanding = styled.div`
@@ -42,7 +44,7 @@ export const ContentShoppingCart = styled.div`
   height: 100%;
   padding: 0px;
   justify-content: flex-start;
-  align-items: flex-start ;
+  align-items: flex-start;
   align-items: left;
   background: whitesmoke;
 `;

@@ -6,12 +6,15 @@ export const WrapperProducts = styled.div`
   display: flex;
   background: whitesmoke;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
   flex-wrap: wrap;
   top: 100;
   align-items: center;
+  @media only screen and (max-width: 400px) {
+    justify-content: center;
+  }
 `;
 
 export const Product = styled.div`
@@ -48,7 +51,6 @@ export const ImageProduct = styled.img`
 export const WrapperInfoProduct = styled.div`
   height: 37%;
   background-color: #e1e1e1;
-  opacity: 0.7;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   padding: 12px;

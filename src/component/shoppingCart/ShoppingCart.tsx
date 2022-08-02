@@ -1,7 +1,7 @@
-import { Button } from "../../../component/Button/Button";
-import { Title } from "../../../component/Title/Title";
+import { Button } from "../Button/Button";
+import { Title } from "../Title/Title";
 import { useState } from "react";
-import { Separator } from "../../../component/Separator/Separator";
+import { Separator } from "../Separator/Separator";
 
 import {
   ContentShoppingCart,
@@ -12,8 +12,8 @@ import {
   WrapperShoppingCart,
   WrapperTitleOutstanding,
 } from "./ShoppingCartStyle";
-import Loading from "../../../component/Loading/Loading";
-import { Products } from "../../../component/Products/Products";
+import Loading from "../Loading/Loading";
+import { Products } from "../Products/Products";
 interface Props {
   categories?: Array<any>;
   products?: Array<any>;
@@ -28,7 +28,7 @@ interface ShoppingCartI {
   products: Array<any>;
 }
 
-const cementoImg = require("../../../styleSheets/images/cemento.png");
+const cementoImg = require("../../styleSheets/images/cemento.png");
 
 export const ShoppingCartFeature = (props: Props) => {
   const [active, setActive] = useState(1);
@@ -44,6 +44,7 @@ export const ShoppingCartFeature = (props: Props) => {
   };
 
   const renderButtons = () => {
+    if (!props.categories) return <></>;
     return props.categories?.map((categorie: any) => {
       return (
         <>
@@ -74,7 +75,7 @@ export const ShoppingCartFeature = (props: Props) => {
       products: [...shoppingCart.products, product],
     });
   };
-
+  console.log(props.products);
   return (
     <WrapperShoppingCart>
       <WrapperTitleOutstanding>

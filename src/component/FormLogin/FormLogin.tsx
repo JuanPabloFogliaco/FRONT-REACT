@@ -1,13 +1,17 @@
-import react from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../Button/Button";
 import { ButtonOutline } from "../ButtonOutline/ButtonOutline";
-import { Card, CardFooter } from "../Card/Card";
 import { Error } from "../Error/Error";
-import { Input, InputGroup } from "../Input/Input";
+import Header from "../Header/Header";
 import { Separator } from "../Separator/Separator";
 import { Title } from "../Title/Title";
-import { Wraper } from "../Wrapper/Wrapper";
+import {
+  CardForm,
+  FormFooter,
+  FormLoginWrapper,
+  Input,
+  InputGroup,
+  TitleForm,
+} from "./FormLoginStyle";
 
 interface FormLoginI {
   message: string;
@@ -20,15 +24,17 @@ const FormLogin = (props: FormLoginI) => {
   const navigate = useNavigate();
 
   return (
-    <Wraper>
-      <Separator />
-      <Title color="#f1f1f1" size={21}>
-        INICIAR SESION
-      </Title>
-      <Separator />
-      <Card padding="16px">
+    <FormLoginWrapper>
+      <Header
+        navigate={() => navigate("/shopping-cart")}
+        title={"ShoppingCart"}
+        logout={() => {}}
+        countProductsInShoppingCart={0}
+      />
+      <Separator height="50" width="100" />
+      <CardForm>
         <InputGroup>
-          <Title>Email</Title>
+          <TitleForm>Email</TitleForm>
           <Input
             required
             type={"email"}
@@ -36,7 +42,7 @@ const FormLogin = (props: FormLoginI) => {
           />
         </InputGroup>
         <InputGroup>
-          <Title>Password</Title>
+          <TitleForm>Password</TitleForm>
           <Input
             required
             type={"password"}
@@ -46,17 +52,17 @@ const FormLogin = (props: FormLoginI) => {
         <Separator />
         <Error>{props.message}</Error>
         <Separator />
-        <CardFooter>
-          <ButtonOutline type="button" onClick={() => navigate("/register")}>
-            <Title color="#070000">Registrarme</Title>
+        <FormFooter>
+          <TitleForm onClick={() => navigate("/register")} color="#868686">
+            ¿Quieres registrarte?
+          </TitleForm>
+          <Separator width="20" />
+          <ButtonOutline onClick={() => props.loginUser()}>
+            <TitleForm color="#ffffff">Iniciar Sesion</TitleForm>
           </ButtonOutline>
-          <Separator width="30" height="0" />
-          <Button type="button" onClick={() => props.loginUser()}>
-            <Title color="#f1f1f1">Ingresar</Title>
-          </Button>
-        </CardFooter>
-      </Card>
-    </Wraper>
+        </FormFooter>
+      </CardForm>
+    </FormLoginWrapper>
   );
 };
 

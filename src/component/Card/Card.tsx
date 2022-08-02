@@ -28,12 +28,3 @@ export const Card = styled.div`
 -moz-box-shadow: 0px 0px 32px -10px rgba(0,0,0,0.48);
 `;
 
-export const CardFooter = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-end;
-  background: #ffffff;
-  width: 100%;
-  height: auto;
-`;

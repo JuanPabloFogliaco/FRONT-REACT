@@ -19,6 +19,7 @@ interface Props {
 }
 
 export const Products = (props: Props) => {
+  console.log(props);
   return (
     <WrapperProducts>
       {props.products?.map((product: any) => {

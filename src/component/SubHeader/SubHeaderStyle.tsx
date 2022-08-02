@@ -11,7 +11,7 @@ export const WrapperSubHeader = styled.div`
   align-items: center;
   background: #f0efef;
   color: black;
-  box-shadow: "1px 5px 15px -3px rgba(0, 0, 0, 0.32)";
+  box-shadow: 1px 5px 15px -3px rgba(0, 0, 0, 0.32);
 `;
 
 export const WrapperSearch = styled.div`
@@ -56,5 +56,5 @@ export const InputSearch = styled.input`
   width: 100%;
   border-color: "#8f8f8f";
   border-width: 0;
-  outline: "none";
+  outline: none;
 `;
