@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../utils";
 import FormRegister from "../../component/FormRegister/FormRegister";
+import { RegisterSync } from "../../redux-slices/RegisterSlice";
+import { useAppDispatch } from "../../app/hooks";
 
 interface ResponseRegister {
   data: any;
@@ -11,6 +13,8 @@ interface ResponseRegister {
 }
 
 export function RegisterFeature() {
+  const dispatch = useAppDispatch();
+
   const [register, setRegister] = useState({
     name: "",
     email: "",
@@ -37,28 +41,57 @@ export function RegisterFeature() {
     setRegister({ ...register, password: password });
   };
 
-  const registerUser = () => {
-    axios
-      .post("http://localhost:8080/api/v1/register", {
-        name: register.name,
-        email: register.email,
-        password: register.password,
-      })
-      .then((res) => {
-        if (res.data.code === 200) {
-          setResponse({
-            code: res.data.code,
-            data: res.data.data,
-            message: res.data.message,
-          });
-          navigate("/login");
-        }
+  const isEmpty = (): boolean => {
+    if (register.email !== "" && register.password !== "") {
+      console.log(register.email);
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const isValidFormatData = (): boolean => {
+    if (isEmail()) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const isEmail = () => {
+    const emailRegex =
+      /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+    if (emailRegex.test(register.email)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const registerUser = async () => {
+    if (!isEmpty()) {
+      if (isValidFormatData()) {
+        await dispatch(
+          RegisterSync({
+            name: register.name,
+            email: register.email,
+            password: register.password,
+          })
+        );
+        navigate("/");
+      } else {
         setResponse({
-          code: res.data.code,
-          data: res.data.data,
-          message: res.data.message,
+          ...response,
+          message: "El valo ingresado no corresponde a un email",
         });
+      }
+    } else {
+      setResponse({
+        ...response,
+        message: "Es necesario cargar el email y password",
       });
+    }
   };
 
   useEffect(() => {

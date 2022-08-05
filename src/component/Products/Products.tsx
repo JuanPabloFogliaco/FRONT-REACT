@@ -1,38 +1,31 @@
-import { Separator } from "../../Separator/Separator";
-import { Wraper } from "../../Wrapper/Wrapper";
+import { ImagenComponent } from "../ImageComponent/Image";
+import { Separator } from "../Separator/Separator";
 import {
+  BtnPayTitle,
   ButtonPay,
-  ImageProduct,
   PriceProduct,
   Product,
   SubTitleProduct,
   TitleProduct,
   WrapperButtonPay,
   WrapperInfoProduct,
-  WraperPoducts
-} from "../Product/Product";
+  WrapperProducts,
+} from "./ProductsStyle";
 
 interface Props {
   products?: Array<any>;
   buy?: any;
+  img?: any;
 }
 
 export const Products = (props: Props) => {
+  console.log(props);
   return (
-    <WraperPoducts
-      background="#0f0f0f"
-      flexDirection="row"
-      justifyContent="flex-start"
-      width="100%"
-      height="auto"
-      wrap="wrap"
-      top={"100"}
-      aligItem="flex-start"
-    >
+    <WrapperProducts>
       {props.products?.map((product: any) => {
         return (
           <Product key={product.name}>
-            <ImageProduct />
+            <ImagenComponent width={"100%"} height={"54%"} src={props.img} />
             <WrapperInfoProduct>
               <TitleProduct>{product.name}</TitleProduct>
               <Separator height="3" />
@@ -42,14 +35,14 @@ export const Products = (props: Props) => {
               <Separator height="32" />
               <WrapperButtonPay>
                 <ButtonPay onClick={() => props.buy(product)}>
-                  <SubTitleProduct>COMPRAR</SubTitleProduct>
+                  <BtnPayTitle color="#fff">COMPRAR</BtnPayTitle>
                 </ButtonPay>
               </WrapperButtonPay>
             </WrapperInfoProduct>
           </Product>
         );
       })}
-    </WraperPoducts>
+    </WrapperProducts>
   );
 };
 

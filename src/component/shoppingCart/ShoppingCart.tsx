@@ -1,30 +1,38 @@
 import { Button } from "../Button/Button";
-import { SideBar } from "./SideBar/SideBar";
 import { Title } from "../Title/Title";
-import { Wraper } from "../Wrapper/Wrapper";
-import Products from "./Products/Products";
 import { useState } from "react";
-import { TitleDestacadoC } from "../TitleDestacado/TitleDestacado";
 import { Separator } from "../Separator/Separator";
-import ReactLoading from "react-loading";
-import { SideBarMobile } from "./SideBar/SideBarMobile";
-import { ButtonOpenSideBarMobile } from "./SideBar/ButtonOpenSideBarMobile";
+
+import {
+  ContentShoppingCart,
+  ContentTitleOutstanding,
+  SideBar,
+  SideBarMobile,
+  TitleOutstanding,
+  WrapperShoppingCart,
+  WrapperTitleOutstanding,
+} from "./ShoppingCartStyle";
+import Loading from "../Loading/Loading";
+import { Products } from "../Products/Products";
 interface Props {
   categories?: Array<any>;
   products?: Array<any>;
   clickButton?: any;
   buy?: any;
   loading?: boolean;
+  titleDestacado: string;
 }
 
-interface ShoppingCart {
+interface ShoppingCartI {
   totalPay: number;
   products: Array<any>;
 }
 
-export const ShoppingCart = (props: Props) => {
+const cementoImg = require("../../styleSheets/images/cemento.png");
+
+export const ShoppingCartFeature = (props: Props) => {
   const [active, setActive] = useState(1);
-  const [shoppingCart, setShoppingCart] = useState<ShoppingCart>({
+  const [shoppingCart, setShoppingCart] = useState<ShoppingCartI>({
     totalPay: 0,
     products: [],
   });
@@ -36,6 +44,7 @@ export const ShoppingCart = (props: Props) => {
   };
 
   const renderButtons = () => {
+    if (!props.categories) return <></>;
     return props.categories?.map((categorie: any) => {
       return (
         <>
@@ -66,65 +75,30 @@ export const ShoppingCart = (props: Props) => {
       products: [...shoppingCart.products, product],
     });
   };
-
+  console.log(props.products);
   return (
-    <Wraper
-      width="100%"
-      height="auto"
-      flexDirection="column"
-      aligItem="flex-start"
-      justifyContent="center"
-      position="relative"
-    >
-      <Wraper
-        height="100%"
-        flexDirection="row"
-        justifyContent="flex-start"
-        aligItem="center"
-      >
-        <TitleDestacadoC />
-        <ButtonOpenSideBarMobile
-          onClick={() => setOpenSideBarMobile(!openSideBarMobile)}
-        >
-         open filtro/menu
-        </ButtonOpenSideBarMobile>
-      </Wraper>
+    <WrapperShoppingCart>
+      <WrapperTitleOutstanding>
+        <ContentTitleOutstanding>
+          <TitleOutstanding>{props.titleDestacado}</TitleOutstanding>
+        </ContentTitleOutstanding>
+      </WrapperTitleOutstanding>
 
-      <Wraper
-        flexDirection="row"
-        width="100%"
-        height="100%"
-        padding="0px"
-        justifyContent="flex-start"
-        aligItem="left"
-      >
-        <SideBar alignItems="left" justifyContent="flex-start">
-          {renderButtons()}
-        </SideBar>
+      <ContentShoppingCart>
+        <SideBar>{renderButtons()}</SideBar>
         {openSideBarMobile && <SideBarMobile>{renderButtons()}</SideBarMobile>}
         {props.loading ? (
-          <Wraper
-            width="100%"
-            height="600px"
-            justifyContent="center"
-            aligItem="center"
-          >
-            <ReactLoading
-              type={"spinningBubbles"}
-              color={"#ad3245"}
-              height={67}
-              width={75}
-            />
-          </Wraper>
+          <Loading />
         ) : (
           <Products
+            img={cementoImg}
             buy={(productPrice: number) => buy(productPrice)}
             products={props.products}
           />
         )}
-      </Wraper>
-    </Wraper>
+      </ContentShoppingCart>
+    </WrapperShoppingCart>
   );
 };
 
-export default ShoppingCart;
+export default ShoppingCartFeature;

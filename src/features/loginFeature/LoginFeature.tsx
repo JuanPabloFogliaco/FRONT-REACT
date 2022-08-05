@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { getToken } from "../utils";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../app/hooks";
 import FormLogin from "../../component/FormLogin/FormLogin";
+import { LoginSync } from "../../redux-slices/LoginSlice";
 
 interface ResponseLogin {
   data: any;
@@ -17,6 +17,7 @@ export function LoginFeature() {
     password: "",
   });
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [response, setResponse] = useState<ResponseLogin>({
     code: 0,
@@ -60,38 +61,13 @@ export function LoginFeature() {
     }
   };
 
-  const loginUser = () => {
+  const loginUser = async () => {
     if (!isEmpty()) {
       if (isValidFormatData()) {
-        return axios
-          .post("http://localhost:8080/api/v1/login", {
-            email: login.email,
-            password: login.password,
-          })
-          .then((res) => {
-            if (res.data.code === 200) {
-              localStorage.setItem("token", res.data.data.token);
-              localStorage.setItem("refreshToken", res.data.data.refreshToken);
-              localStorage.setItem("email", res.data.data.email);
-              localStorage.setItem("userRole", res.data.data.userRole);
-              setResponse({
-                data: res.data.data,
-                code: res.data.code,
-                message: res.data.message,
-              });
-              navigate("/");
-            } else {
-              setResponse({
-                data: res.data.data,
-                code: res.data.code,
-                message: res.data.message,
-              });
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-            console.log("401 PADREE");
-          });
+        await dispatch(
+          LoginSync({ email: login.email, password: login.password })
+        );
+        navigate("/");
       } else {
         setResponse({
           ...response,
@@ -107,9 +83,9 @@ export function LoginFeature() {
   };
 
   useEffect(() => {
-    if (localStorage.length > 0) {
+  /*   if (localStorage.getItem("token") !== null) {
       navigate("/");
-    }
+    } */
   });
 
   return (

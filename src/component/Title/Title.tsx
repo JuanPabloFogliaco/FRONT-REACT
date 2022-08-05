@@ -16,7 +16,7 @@ export const Title = styled.p`
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 800;
   padding: ${(props: Props) => (props.padding ? props.padding : "0px")};
-  cursor: ${(props: Props) => (props.cursor ? props.cursor : "")};
+  cursor: ${(props: Props) => (props.cursor ? props.cursor : "pointer")};
   padding-left: ${(props: Props) =>
     props.paddingLeft ? props.paddingLeft : "0px"};
 `;

@@ -1,13 +1,13 @@
 import react from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../Button/Button";
 import { ButtonOutline } from "../ButtonOutline/ButtonOutline";
-import { Card, CardFooter } from "../Card/Card";
 import { Error } from "../Error/Error";
+import { ContainterFooter, FormFooter } from "../FormLogin/FormLoginStyle";
+import Header from "../Header/Header";
 import { Input, InputGroup } from "../Input/Input";
 import { Separator } from "../Separator/Separator";
 import { Title } from "../Title/Title";
-import { Wraper } from "../Wrapper/Wrapper";
+import { CardForm, FormRegisterWrapper } from "./FormRegisterStyle";
 
 interface FormRegisterI {
   message: string;
@@ -21,13 +21,15 @@ const FormRegister = (props: FormRegisterI) => {
   const navigate = useNavigate();
 
   return (
-    <Wraper>
+    <FormRegisterWrapper>
+      <Header
+        navigate={() => navigate("/shopping-cart")}
+        title={"ShoppingCart"}
+        logout={() => {}}
+        countProductsInShoppingCart={0}
+      />
       <Separator />
-      <Title color="#f1f1f1" size={21}>
-        REGISTRARME
-      </Title>
-      <Separator />
-      <Card padding="16px">
+      <CardForm>
         <InputGroup>
           <Title>Name</Title>
           <Input
@@ -55,17 +57,19 @@ const FormRegister = (props: FormRegisterI) => {
         <Separator />
         <Error>{props.message}</Error>
         <Separator />
-        <CardFooter>
-          <ButtonOutline type="button" onClick={() => navigate("/login")}>
-            <Title color="#070000">Ingresar</Title>
-          </ButtonOutline>
-          <Separator width="30" height="0" />
-          <Button type="button" onClick={() => props.registerUser()}>
-            <Title color="#f1f1f1">Ingresar</Title>
-          </Button>
-        </CardFooter>
-      </Card>
-    </Wraper>
+        <FormFooter>
+          <ContainterFooter>
+          
+              <Title onClick={() => navigate("/login")} color="#868686">¿Quieres iniciar sesion?</Title>
+           
+            <Separator width="7" height="10" />
+            <ButtonOutline onClick={() => props.registerUser()}>
+              <Title color="#ffffff">Registrar</Title>
+            </ButtonOutline>
+          </ContainterFooter>
+        </FormFooter>
+      </CardForm>
+    </FormRegisterWrapper>
   );
 };
 
