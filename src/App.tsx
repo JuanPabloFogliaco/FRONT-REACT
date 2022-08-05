@@ -7,7 +7,6 @@ import { RegisterFeature } from "./features/registerFeature/RegisterFeature";
 import { DetailShoppingCart } from "./features/detailShoppingCartFeature/DetailShoppingCartFeature";
 import "./styles/App.css";
 import Loading from "./component/Loading/Loading";
-import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -89,7 +88,6 @@ function App() {
         <Route path="/login" element={<LoginFeature />} />
         <Route path="/" element={<HomeFeature />} />
         <Route path="/shopping-cart" element={<DetailShoppingCart />} />
-        <PrivateRoute />
       </Routes>
     </div>
   );

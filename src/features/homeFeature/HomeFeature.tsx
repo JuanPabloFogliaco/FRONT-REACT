@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Carrousel from "../../component/Carrousel/Carrousel";
@@ -31,18 +31,6 @@ export function HomeFeature() {
 
   const [openFilter, setOpenFilter] = useState(false);
 
-  useEffect(() => {
-   /*  if (getToken() === null) navigate("/login"); */
-    getShop()
-      .then(() => {})
-      .catch((e) => console.log("e", e));
-  }, []);
-
-  const getShop = async () => {
-    await dispatch(setLoading);
-    await dispatch(GetCategoriesSync());
-    await dispatch(GetProductsSync(1));
-  };
 
   const Logout = () => {
     localStorage.clear();
@@ -55,6 +43,18 @@ export function HomeFeature() {
   const Buy = (product: any) => {
     dispatch(addToShoppingCart(product));
   };
+
+  useEffect(() => {
+    /*  if (getToken() === null) navigate("/login"); */
+   // (async () => {
+   //   await 
+   // })()
+ 
+ 
+   dispatch(setLoading);
+   dispatch(GetCategoriesSync());
+   dispatch(GetProductsSync(1));
+   }, [dispatch]);
 
   return (
     <WrapperHome>
